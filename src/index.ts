@@ -30,7 +30,7 @@ import * as messageHandler from './backend/messageHandler';
 bot.on('ready', () => {
     // start Modules
     joinHandler.checkNewUser();
-    messageHandler.checkMessageAuthor()
+    messageHandler.checkMessageAuthor();
 
 
     // output Infos

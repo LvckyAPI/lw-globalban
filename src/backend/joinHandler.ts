@@ -35,8 +35,8 @@ https://lvckyworld.net/discord
                 }).catch(err => { })
                     .then(() => {
                         member.kick(`This Player is global banned Reason: "${element.banreason}" banned by "${element.bancreatorname}" from the Server ${element.bannedOn}`)
-                    })
+                    });
             }
         });
-    })
+    });
 }

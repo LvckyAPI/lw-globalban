@@ -35,9 +35,9 @@ https://lvckyworld.net/discord
                     .then(() => {
                         message.member?.kick();
                         (message.deletable ? message.delete() : {});
-                    })
+                    });
             }
         });
-    })
+    });
 
 }
