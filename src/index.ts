@@ -31,6 +31,7 @@ bot.on('ready', () => {
     // start Modules
     joinHandler.checkNewUser();
     messageHandler.checkMessageAuthor();
+    messageHandler.updateBanList();
 
 
     // output Infos

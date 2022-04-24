@@ -1,10 +1,12 @@
 import { bot } from '../index';
 import * as api from './api';
 
-export async function checkMessageAuthor() {
 
+var rawBanList: any;
+
+export async function checkMessageAuthor() {
+    rawBanList = (await api.MARINA.getGlobalBanList());
     bot.on('messageCreate', async (message) => {
-        var rawBanList = (await api.MARINA.getGlobalBanList());
         rawBanList.globalbans.forEach((element: { clientid: string; banreason: any; bancreatorname: any; bannedOn: any; }) => {
             if ((element.clientid as string).includes(message.author.id)) {
                 if (!message.member?.kickable) return;
@@ -39,5 +41,10 @@ https://lvckyworld.net/discord
             }
         });
     });
+}
 
+export async function updateBanList() {
+    setInterval(async () => {
+        rawBanList = (await api.MARINA.getGlobalBanList());
+    }, 1000 * 60 * 10);
 }
