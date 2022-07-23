@@ -12,7 +12,7 @@ export class MARINA {
      * @returns The GlobalBanList as Json
      */
     public static getGlobalBanList() {
-        return fetch('http://api.lvckyworld.net:19450/dcGlobalBanList')
+        return fetch('https://api.lvckyworld.net:61619/dcGlobalBanList')
             .then(res => res.json())
             .then(json => {
                 return json;
