@@ -9,7 +9,7 @@ export async function handleMessages() {
             return;
         }
 
-        var cmdPrefix = 'x!';
+        var cmdPrefix = 'lw.';
         var command = message.content.toLowerCase().slice(cmdPrefix.length).split(" ")[0];
         var args = message.content.slice(cmdPrefix.length).split(" ").slice(1);
 
