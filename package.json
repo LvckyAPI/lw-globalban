@@ -7,5 +7,23 @@
     "lvckyworld-api": "^1.0.7",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
-  }
+  },
+  "name": "lw-globalban",
+  "description": "Hello Iven S.\r Hello Iven S.",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LvckyAPI/lw-globalban.git"
+  },
+  "author": "LvckyAPI | Iven Schlenther",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LvckyAPI/lw-globalban/issues"
+  },
+  "homepage": "https://github.com/LvckyAPI/lw-globalban#readme"
 }
