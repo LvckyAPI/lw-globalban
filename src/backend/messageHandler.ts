@@ -44,7 +44,8 @@ https://lvckyworld.net/discord
 }
 
 export async function updateBanList() {
+    rawBanList = await api.MARINA.getGlobalBanList();
     setInterval(async () => {
-        rawBanList = (await api.MARINA.getGlobalBanList());
+        rawBanList = await api.MARINA.getGlobalBanList();
     }, 1000 * 60);
 }

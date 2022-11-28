@@ -1,6 +1,7 @@
 import * as Discord from 'discord.js';
 import * as fs from 'fs';
 import 'dotenv/config';
+import { info } from 'node:console';
 
 export const bot = new Discord.Client({ intents: 3276799 });
 
@@ -20,9 +21,9 @@ bot.on('ready', () => {
 
 
     // output Infos
-    console.info(`The bot is on ${bot.guilds.cache.size} guilds.`);
-    console.info(`The bot is started succsessfully.`);
-    console.info(`The bot is logged in as ${bot.user?.username}#${bot.user?.discriminator}`);
+    info(`The bot is on ${bot.guilds.cache.size} guilds.`);
+    info(`The bot is started succsessfully.`);
+    info(`The bot is logged in as ${bot.user?.username}#${bot.user?.discriminator}`);
 });
 
 // create getters
