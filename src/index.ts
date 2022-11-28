@@ -1,26 +1,9 @@
 import * as Discord from 'discord.js';
 import * as fs from 'fs';
 import 'dotenv/config';
+import { info } from 'node:console';
 
-export const bot = new Discord.Client({
-    intents: [
-        Discord.Intents.FLAGS.GUILDS,
-        Discord.Intents.FLAGS.GUILD_MEMBERS,
-        Discord.Intents.FLAGS.GUILD_BANS,
-        Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-        Discord.Intents.FLAGS.GUILD_INTEGRATIONS,
-        Discord.Intents.FLAGS.GUILD_WEBHOOKS,
-        Discord.Intents.FLAGS.GUILD_INVITES,
-        Discord.Intents.FLAGS.GUILD_VOICE_STATES,
-        Discord.Intents.FLAGS.GUILD_PRESENCES,
-        Discord.Intents.FLAGS.GUILD_MESSAGES,
-        Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Discord.Intents.FLAGS.GUILD_MESSAGE_TYPING,
-        Discord.Intents.FLAGS.DIRECT_MESSAGES,
-        Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-        Discord.Intents.FLAGS.DIRECT_MESSAGE_TYPING,
-    ],
-});
+export const bot = new Discord.Client({ intents: 3276799 });
 
 // import modules
 import * as joinHandler from './backend/joinHandler';
@@ -38,9 +21,9 @@ bot.on('ready', () => {
 
 
     // output Infos
-    console.info(`The bot is on ${bot.guilds.cache.size} guilds.`);
-    console.info(`The bot is started succsessfully.`);
-    console.info(`The bot is logged in as ${bot.user?.username}#${bot.user?.discriminator}`);
+    info(`The bot is on ${bot.guilds.cache.size} guilds.`);
+    info(`The bot is started succsessfully.`);
+    info(`The bot is logged in as ${bot.user?.username}#${bot.user?.discriminator}`);
 });
 
 // create getters

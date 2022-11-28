@@ -1,5 +1,4 @@
-import fetch from "node-fetch";
-
+import * as api from "lvckyworld-api"
 /**
  * That's the INSTANCE of the RestfulAPI-Marina
  * @author LvckyAPI, IloveKOHL 
@@ -12,14 +11,9 @@ export class MARINA {
      * @returns The GlobalBanList as Json
      */
     public static getGlobalBanList() {
-        return fetch('https://api.lvckyworld.net:61619/dcGlobalBanList')
-            .then(res => res.json())
-            .then(json => {
-                return json;
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        return (async () => {
+            return api.MARINA.getDcGlobalBanList()
+        })()
     }
 
 }
