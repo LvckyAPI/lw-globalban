@@ -5,13 +5,9 @@ import * as fs from 'fs';
 export async function handleMessages() {
     bot.on('messageCreate', async (message) => {
 
-        if (!await api.MARINA.isSystemAdmin(message.author.id)) {
-            return;
-        }
-
+        if (!await api.MARINA.isSystemAdmin(message.author.id)) return;
         var cmdPrefix = 'lw.';
         var command = message.content.toLowerCase().slice(cmdPrefix.length).split(" ")[0];
-        var args = message.content.slice(cmdPrefix.length).split(" ").slice(1);
 
         switch (command) {
             case 'leave':
@@ -19,25 +15,21 @@ export async function handleMessages() {
                 await message.guild?.leave();
                 break;
             case 'permleave':
+                if (!message.guildId) return;
+
                 var joinBlacklist = fs.readFileSync(
                     __dirname + '/../data/joinBlacklist.json',
                     { encoding: 'utf-8' })
 
-                interface blacklist {
-                    blacklist: [
-                        { guildId: string }
-                    ]
-                }
-
-                if (!message.guildId) return;
+                interface blacklist { blacklist: [{ guildId: string }] }
                 let list: blacklist = JSON.parse(joinBlacklist);
+
+                
                 if (list.blacklist.some(elm => elm.guildId == message.guildId)) return;
-
-                const json = {
-                    guildId: message.guildId
-                }
-
+                const json = { guildId: message.guildId }
+                
                 list.blacklist.push(json);
+
                 fs.writeFileSync(
                     __dirname + '/../data/joinBlacklist.json',
                     JSON.stringify(list),
