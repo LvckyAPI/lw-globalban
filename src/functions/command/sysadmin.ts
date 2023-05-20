@@ -1,4 +1,4 @@
-import { bot } from '../index';
+import {bot} from '../../index';
 import * as api from 'lvckyworld-api';
 import * as fs from 'fs';
 
@@ -6,41 +6,42 @@ export async function handleMessages() {
     bot.on('messageCreate', async (message) => {
 
         if (!await api.MARINA.isSystemAdmin(message.author.id)) return;
-        var cmdPrefix = 'lw.';
-        var command = message.content.toLowerCase().slice(cmdPrefix.length).split(" ")[0];
+        const cmdPrefix = 'lw.';
+        const command = message.content.toLowerCase().slice(cmdPrefix.length).split(" ")[0];
 
         switch (command) {
             case 'leave':
                 await message.reply('Meister, Ihr Wunsch ist mir Befehl!\n`leave`');
                 await message.guild?.leave();
                 break;
-            case 'permleave':
+            case 'perm-leave':
                 if (!message.guildId) return;
 
-                var joinBlacklist = fs.readFileSync(
-                    __dirname + '/../data/joinBlacklist.json',
-                    { encoding: 'utf-8' })
+                const joinBlacklist = fs.readFileSync(
+                    __dirname + '/../../data/joinBlacklist.json',
+                    {encoding: 'utf-8'}
+                );
 
-                interface blacklist { blacklist: [{ guildId: string }] }
                 let list: blacklist = JSON.parse(joinBlacklist);
-
-                
                 if (list.blacklist.some(elm => elm.guildId == message.guildId)) return;
-                const json = { guildId: message.guildId }
-                
+
+                const json = {guildId: message.guildId};
                 list.blacklist.push(json);
 
                 fs.writeFileSync(
-                    __dirname + '/../data/joinBlacklist.json',
+                    __dirname + '/../../data/joinBlacklist.json',
                     JSON.stringify(list),
-                    { encoding: 'utf-8' }
+                    {encoding: 'utf-8'}
                 )
 
-                await message.reply('Meister, Ihr Wunsch ist mir Befehl!\n`permleave`');
+                await message.reply('Meister, Ihr Wunsch ist mir Befehl!\n`perm-leave`');
                 await message.guild?.leave();
 
                 break;
         }
-
     })
+}
+
+interface blacklist {
+    blacklist: [{ guildId: string }]
 }
