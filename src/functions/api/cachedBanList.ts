@@ -11,7 +11,7 @@ export class CachedBanList {
     public static rawBanList: lwGlobalBan;
 
     public static async initCache() {
-        if (this.isInitiated) return console.error("The cache is already initialize");
+        if (this.isInitiated) return console.error("The cache was already initialized");
         this.setInitiated(true);
 
         this.rawBanList = await api.MARINA.getGlobalBanList();
