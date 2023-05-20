@@ -1,14 +1,11 @@
-import { bot } from '../index';
-import * as api from './api';
-
-
-var rawBanList: any;
+import {bot} from '../index';
+import {Colors} from "discord.js";
+import {CachedBanList} from "./cachedBanList";
 
 export async function checkMessageAuthor() {
-    rawBanList = (await api.MARINA.getGlobalBanList());
     bot.on('messageCreate', async (message) => {
-        rawBanList.globalbans.forEach((element: { clientid: string; banreason: any; bancreatorname: any; bannedOn: any; }) => {
-            if ((element.clientid as string).includes(message.author.id)) {
+        CachedBanList.rawBanList.globalbans.forEach((banItem) => {
+            if ((banItem.clientid as string).includes(message.author.id)) {
                 if (!message.member?.kickable) return;
 
                 message.member.send({
@@ -19,10 +16,10 @@ export async function checkMessageAuthor() {
                             description: `
 You are on the LvckyWorld GlobalBAN list.
 
-**Reason:** \`${element.banreason}\`
-**BannedBy:** \`${element.bancreatorname}\`
+**Reason:** \`${banItem.banreason}\`
+**BannedBy:** \`${banItem.bancreatorname}\`
 **Ban created on Server:**
-\`\`\`${element.bannedOn}\`\`\`
+\`\`\`${banItem.bannedOn}\`\`\`
 
 If you want to create a unban request, you have to join the **LvckyWorld - Server** and create a **Ticket**
 https://lvckyworld.net/discord
@@ -30,10 +27,11 @@ https://lvckyworld.net/discord
                             thumbnail: {
                                 url: `https://lvckyworld.net/images/logo222.png`
                             },
-                            color: 'RED'
+                            color: Colors.Red
                         }
                     ]
-                }).catch(err => { })
+                }).catch(() => {
+                })
                     .then(() => {
                         message.member?.kick();
                         (message.deletable ? message.delete() : {});
@@ -41,11 +39,4 @@ https://lvckyworld.net/discord
             }
         });
     });
-}
-
-export async function updateBanList() {
-    rawBanList = await api.MARINA.getGlobalBanList();
-    setInterval(async () => {
-        rawBanList = await api.MARINA.getGlobalBanList();
-    }, 1000 * 60);
 }
