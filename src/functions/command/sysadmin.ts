@@ -1,4 +1,4 @@
-import {bot} from '../index';
+import {bot} from '../../index';
 import * as api from 'lvckyworld-api';
 import * as fs from 'fs';
 
@@ -18,7 +18,7 @@ export async function handleMessages() {
                 if (!message.guildId) return;
 
                 const joinBlacklist = fs.readFileSync(
-                    __dirname + '/../data/joinBlacklist.json',
+                    __dirname + '/../../data/joinBlacklist.json',
                     {encoding: 'utf-8'}
                 );
 
@@ -29,7 +29,7 @@ export async function handleMessages() {
                 list.blacklist.push(json);
 
                 fs.writeFileSync(
-                    __dirname + '/../data/joinBlacklist.json',
+                    __dirname + '/../../data/joinBlacklist.json',
                     JSON.stringify(list),
                     {encoding: 'utf-8'}
                 )

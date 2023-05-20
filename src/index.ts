@@ -6,10 +6,10 @@ import {info} from 'node:console';
 export const bot = new Discord.Client({intents: 3276799});
 
 // import modules
-import * as joinHandler from './functions/joinHandler';
-import * as messageHandler from './functions/messageHandler';
-import * as sysadmin from './functions/sysadmin';
-import {CachedBanList} from "./functions/cachedBanList";
+import * as joinHandler from './functions/events/joinHandler';
+import * as messageHandler from './functions/events/messageHandler';
+import * as sysadmin from './functions/command/sysadmin';
+import {CachedBanList} from "./functions/api/cachedBanList";
 
 bot.on('ready', () => {
 

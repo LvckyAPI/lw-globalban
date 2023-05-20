@@ -1,14 +1,16 @@
-import {bot} from '../index';
+import {bot} from '../../index';
 import {Colors} from "discord.js";
-import {CachedBanList} from "./cachedBanList";
+import {CachedBanList} from "../api/cachedBanList";
 
-export async function checkMessageAuthor() {
-    bot.on('messageCreate', async (message) => {
-        CachedBanList.rawBanList.globalbans.forEach((banItem) => {
-            if ((banItem.clientid as string).includes(message.author.id)) {
-                if (!message.member?.kickable) return;
+export async function checkNewUser() {
 
-                message.member.send({
+    bot.on('guildMemberAdd', async (joinedMember) => {
+        const rawBanList = CachedBanList.rawBanList;
+        rawBanList.globalbans.forEach((banItem) => {
+            if ((banItem.clientid as string).includes(joinedMember.id)) {
+                if (!joinedMember.kickable) return;
+
+                joinedMember.send({
                     embeds: [
                         {
                             title: `❌ LvckyWorld - GlobalBAN ❌`,
@@ -21,7 +23,7 @@ You are on the LvckyWorld GlobalBAN list.
 **Ban created on Server:**
 \`\`\`${banItem.bannedOn}\`\`\`
 
-If you want to create a unban request, you have to join the **LvckyWorld - Server** and create a **Ticket**
+If you want to create a unban request, you have to join the **LvckyWorld - Server** and create a **ticket**
 https://lvckyworld.net/discord
                         `,
                             thumbnail: {
@@ -33,8 +35,7 @@ https://lvckyworld.net/discord
                 }).catch(() => {
                 })
                     .then(() => {
-                        message.member?.kick();
-                        (message.deletable ? message.delete() : {});
+                        joinedMember.kick(`This Player is global banned Reason: "${banItem.banreason}" banned by "${banItem.bancreatorname}" from the Server ${banItem.bannedOn}`)
                     });
             }
         });
