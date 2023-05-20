@@ -11,7 +11,7 @@
     "1. Clone project",
     "2. Checkout update branch",
     "3. run `npm install` and test everything",
-    "4. If everything is fine and fixes are pushed, merge th MR"
+    "4. If everything is fine and fixes are pushed, merge the MR"
   ],
   "addLabels": ["priority - p1", "type - security"]
 }
