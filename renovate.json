@@ -1,0 +1,18 @@
+{
+  "assignees": ["iven.s"],     
+  "baseBranches": ["master"],
+  "gitlabci-include": {
+      "enabled": false
+  },
+  "groupName": "all",
+  "commitMessagePrefix": "[TASK]",
+  "prBodyNotes": [
+    "# Update dependencies",
+    "1. Clone project",
+    "2. Checkout update branch",
+    "3. run `npm install` and test everything",
+    "4. If everything is fine and fixes are pushed, merge th MR"
+  ],
+  "addLabels": ["priority - p1", "type - security"]
+}
+
