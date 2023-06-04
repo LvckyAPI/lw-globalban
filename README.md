@@ -4,5 +4,5 @@ The official LvckyWorld Globalban-Bot makes sure that your server is free from u
 ## Self-host the bot:
 - clone repository
 - run `npm i && npm i -g ts-node` as root
-- creat `.env`-File with the key `BOT_TOKEN="<TOKEN>"`
+- create `.env`-File with the key `BOT_TOKEN="<TOKEN>"`
 - run `ts-node src/index.ts`
